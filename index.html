@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Piñas Locas Quetzaly · Paletas, Aguas Frescas y Mangonadas en Orange, NJ</title>
+<meta name="description" content="Piñas Locas Quetzaly llegó a Orange. Mangonadas, aguas frescas, paletas, malteadas y vasos locos hechos al momento en 203 Main St, City of Orange, NJ. Fresco, dulce y picosito." />
+
+<!-- Fonts: Panchang (display) + Satoshi (body) via Fontshare -->
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link href="https://api.fontshare.com/v2/css?f[]=panchang@400,500,600,700,800&f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet" />
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍍</text></svg>" />
+
+<style>
+  :root{
+    --coral:#FF5A5F;
+    --coral-deep:#E63E48;
+    --lime:#1C7C54;
+    --lime-bright:#36C46F;
+    --mango:#FFB627;
+    --mango-deep:#FF8A1E;
+    --watermelon:#FF4D6D;
+    --cream:#FFF7EC;
+    --cream-2:#FFEFD9;
+    --ink:#231a16;
+    --ink-soft:#5b4a40;
+    --shadow:0 18px 40px -18px rgba(35,26,22,.35);
+    --r-lg:34px;
+    --r-md:22px;
+    --r-sm:14px;
+    --maxw:1180px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Satoshi",system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    overflow-x:clip;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.55;
+  }
+  h1,h2,h3,.display{font-family:"Panchang","Satoshi",sans-serif;line-height:1.02;letter-spacing:-.01em}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  section{position:relative}
+  .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  :focus-visible{outline:3px solid var(--lime);outline-offset:3px;border-radius:6px}
+
+  /* ---------- decorative confetti dots layer ---------- */
+  #confetti-layer{position:fixed;inset:0;pointer-events:none;z-index:90;overflow:hidden}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky;top:0;z-index:80;
+    background:rgba(255,247,236,.82);
+    backdrop-filter:blur(12px) saturate(140%);
+    border-bottom:2px solid rgba(35,26,22,.06);
+    transition:box-shadow .3s ease;
+  }
+  .nav.scrolled{box-shadow:0 10px 30px -22px rgba(35,26,22,.6)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:11px 22px;max-width:var(--maxw);margin:0 auto}
+  .brand{display:flex;align-items:center;gap:10px;font-family:"Panchang";font-weight:700;font-size:1.12rem;letter-spacing:-.01em}
+  .brand .badge{
+    width:38px;height:38px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #FFD96A, var(--mango-deep));
+    display:grid;place-items:center;font-size:20px;flex:none;
+    box-shadow:inset 0 -3px 6px rgba(0,0,0,.12);
+  }
+  .brand span.k{color:var(--coral)}
+  .nav-links{display:flex;align-items:center;gap:26px;font-weight:500;font-size:.95rem}
+  .nav-links a{position:relative;padding:4px 0;color:var(--ink-soft);transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:-2px;height:2px;background:var(--coral);transition:right .25s ease;border-radius:2px}
+  .nav-links a:hover::after{right:0}
+
+  .nav-right{display:flex;align-items:center;gap:12px}
+  .lang-toggle{
+    display:flex;border:2px solid var(--ink);border-radius:999px;overflow:hidden;font-weight:700;font-size:.74rem;
+  }
+  .lang-toggle button{
+    border:none;background:transparent;cursor:pointer;padding:6px 11px;font-family:inherit;font-weight:700;color:var(--ink-soft);transition:.2s;
+  }
+  .lang-toggle button.active{background:var(--ink);color:var(--cream)}
+
+  .call-cta{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--coral);color:#fff;font-weight:700;
+    padding:10px 18px;border-radius:999px;font-size:.92rem;
+    box-shadow:0 10px 22px -10px var(--coral);
+    transition:transform .15s ease, box-shadow .2s;
+    white-space:nowrap;
+  }
+  .call-cta:hover{transform:translateY(-2px);box-shadow:0 16px 28px -10px var(--coral)}
+  .call-cta .ico{display:none}
+  .call-cta .num{display:inline}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:46px 0 30px;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:38px;align-items:center}
+  .status-pill{
+    display:inline-flex;align-items:center;gap:9px;
+    background:#fff;border:2px solid rgba(35,26,22,.1);
+    padding:7px 14px;border-radius:999px;font-weight:700;font-size:.82rem;
+    box-shadow:var(--shadow);margin-bottom:20px;
+  }
+  .status-dot{width:10px;height:10px;border-radius:50%;background:var(--lime-bright);position:relative}
+  .status-dot.closed{background:#c9c2bb}
+  .status-dot::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--lime-bright);opacity:.5;animation:ping 1.8s ease-out infinite}
+  .status-dot.closed::after{display:none}
+  @keyframes ping{0%{transform:scale(.6);opacity:.6}100%{transform:scale(1.8);opacity:0}}
+
+  .hero h1{font-size:clamp(2.7rem,8vw,5.1rem);font-weight:700}
+  .hero h1 .tilt{display:inline-block;color:var(--coral)}
+  .hero h1 em{font-style:normal;color:var(--lime);position:relative}
+  .hero .sub{font-size:clamp(1.02rem,2.4vw,1.22rem);color:var(--ink-soft);max-width:30ch;margin:18px 0 26px;font-weight:500}
+  .hero-cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  .btn-primary{
+    display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:var(--cream);
+    font-weight:700;padding:14px 24px;border-radius:999px;font-size:1rem;cursor:pointer;border:none;font-family:inherit;
+    transition:transform .15s, background .2s;
+  }
+  .btn-primary:hover{transform:translateY(-2px);background:#000}
+  .btn-ghost{
+    display:inline-flex;align-items:center;gap:8px;font-weight:700;padding:13px 20px;border-radius:999px;
+    border:2px solid var(--ink);color:var(--ink);font-size:1rem;transition:background .2s,color .2s;
+  }
+  .btn-ghost:hover{background:var(--ink);color:var(--cream)}
+  .hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+  .tag{background:var(--cream-2);border:1.5px solid rgba(255,138,30,.25);color:var(--mango-deep);font-weight:700;font-size:.78rem;padding:6px 12px;border-radius:999px}
+
+  /* hero collage */
+  .hero-art{position:relative;height:clamp(360px,52vw,520px)}
+  .ha{position:absolute;border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow);border:4px solid #fff}
+  .ha img{width:100%;height:100%;object-fit:cover}
+  .ha1{width:62%;height:74%;left:0;top:5%;z-index:2;transform:rotate(-4deg)}
+  .ha2{width:46%;height:50%;right:0;top:0;z-index:3;transform:rotate(4deg)}
+  .ha3{width:50%;height:46%;right:4%;bottom:0;z-index:4;transform:rotate(-2deg)}
+  .ha:hover{transform:rotate(0) scale(1.02);z-index:9;transition:transform .35s}
+  .sticker{
+    position:absolute;z-index:6;background:var(--lime);color:#fff;font-family:"Panchang";font-weight:700;
+    border-radius:50%;width:96px;height:96px;display:grid;place-items:center;text-align:center;font-size:.72rem;line-height:1.1;
+    transform:rotate(-12deg);box-shadow:var(--shadow);left:50%;bottom:8%;padding:8px;
+  }
+
+  /* ---------- MARQUEE ---------- */
+  .marquee{background:var(--coral);color:#fff;padding:14px 0;overflow:hidden;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);transform:rotate(-1.4deg);margin:34px 0;width:100%}
+  .marquee-track{display:flex;gap:0;white-space:nowrap;width:max-content;animation:scrollx 26s linear infinite;font-family:"Panchang";font-weight:600;font-size:1.05rem}
+  .marquee-track span{padding:0 26px;display:inline-flex;align-items:center;gap:18px}
+  .marquee-track span::after{content:"🍍";font-size:1rem}
+  @keyframes scrollx{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ---------- SECTION HEADERS ---------- */
+  .sec{padding:54px 0}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--coral)}
+  .kicker::before{content:"";width:26px;height:3px;background:var(--coral);border-radius:3px}
+  .sec h2{font-size:clamp(2rem,5.4vw,3.3rem);font-weight:700;margin:14px 0 10px}
+  .sec .lede{color:var(--ink-soft);max-width:52ch;font-weight:500;font-size:1.05rem}
+
+  /* ---------- MENU CARDS ---------- */
+  .menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:38px}
+  .mcard{
+    background:#fff;border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow);
+    border:2px solid rgba(35,26,22,.05);transition:transform .3s ease, box-shadow .3s;display:flex;flex-direction:column;
+  }
+  .mcard:hover{transform:translateY(-7px);box-shadow:0 28px 50px -22px rgba(35,26,22,.5)}
+  .mcard .pic{aspect-ratio:4/3;overflow:hidden;position:relative}
+  .mcard .pic img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+  .mcard:hover .pic img{transform:scale(1.07)}
+  .mcard .pic .chip{position:absolute;top:12px;left:12px;background:var(--mango);color:var(--ink);font-weight:700;font-size:.72rem;padding:5px 11px;border-radius:999px;box-shadow:0 6px 14px -6px rgba(0,0,0,.4)}
+  .mcard .body{padding:18px 20px 22px;flex:1;display:flex;flex-direction:column}
+  .mcard h3{font-size:1.35rem;font-weight:600;margin-bottom:5px}
+  .mcard p{color:var(--ink-soft);font-size:.93rem;font-weight:500;flex:1}
+  .mcard .price{margin-top:14px;font-family:"Panchang";font-weight:700;color:var(--lime);font-size:1.05rem}
+
+  /* ---------- BUILD-YOUR-CUP (signature) ---------- */
+  .builder{background:linear-gradient(180deg,var(--cream-2),#FFE2C4);padding:60px 0;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink)}
+  .build-grid{display:grid;grid-template-columns:1fr 1fr;gap:42px;align-items:center;margin-top:34px}
+  .wheel-wrap{position:relative;display:grid;place-items:center}
+  .picker-block{margin-bottom:22px}
+  .picker-block h4{font-family:"Panchang";font-weight:600;font-size:1.05rem;margin-bottom:11px;display:flex;align-items:center;gap:8px}
+  .picker-block h4 .n{width:24px;height:24px;border-radius:50%;background:var(--coral);color:#fff;display:grid;place-items:center;font-size:.78rem;font-weight:700}
+  .opts{display:flex;flex-wrap:wrap;gap:9px}
+  .opt{
+    cursor:pointer;border:2px solid rgba(35,26,22,.14);background:#fff;border-radius:999px;
+    padding:8px 15px;font-weight:700;font-size:.88rem;display:inline-flex;align-items:center;gap:7px;
+    transition:transform .12s, border-color .2s, background .2s;user-select:none;font-family:inherit;color:var(--ink);
+  }
+  .opt:hover{transform:translateY(-2px)}
+  .opt[aria-pressed="true"]{border-color:var(--coral);background:var(--coral);color:#fff}
+  .opt .em{font-size:1.05rem}
+
+  /* the live cup */
+  .cup-stage{position:relative;width:min(300px,78vw);aspect-ratio:3/4}
+  .cup-svg{width:100%;height:100%;filter:drop-shadow(0 24px 30px rgba(35,26,22,.28))}
+  .cup-readout{
+    margin-top:18px;background:#fff;border:2px solid var(--ink);border-radius:var(--r-md);padding:16px 20px;width:min(320px,86vw);text-align:center;box-shadow:var(--shadow);
+  }
+  .cup-readout .nm{font-family:"Panchang";font-weight:700;font-size:1.18rem;color:var(--ink)}
+  .cup-readout .ing{color:var(--ink-soft);font-size:.88rem;font-weight:600;margin-top:4px;min-height:1.3em}
+  .cup-readout .ord{margin-top:13px;display:inline-flex;align-items:center;gap:8px;background:var(--lime);color:#fff;font-weight:700;padding:9px 18px;border-radius:999px;font-size:.9rem;transition:transform .15s}
+  .cup-readout .ord:hover{transform:translateY(-2px)}
+
+  /* ---------- PANORAMA STRIP ---------- */
+  .pano{padding:8px 0 60px}
+  .pano-row{display:flex;gap:16px;overflow-x:auto;padding:8px 22px 18px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+  .pano-row::-webkit-scrollbar{height:8px}
+  .pano-row::-webkit-scrollbar-thumb{background:var(--mango);border-radius:8px}
+  .pano-card{flex:none;width:min(340px,80vw);scroll-snap-align:start;border-radius:var(--r-md);overflow:hidden;position:relative;box-shadow:var(--shadow);border:4px solid #fff}
+  .pano-card img{width:100%;height:260px;object-fit:cover}
+  .pano-card .cap{position:absolute;left:0;right:0;bottom:0;padding:14px 16px;color:#fff;font-family:"Panchang";font-weight:600;background:linear-gradient(transparent,rgba(35,26,22,.82))}
+
+  /* ---------- VISIT / MAP ---------- */
+  .visit{background:var(--lime);color:var(--cream);padding:60px 0;border-top:3px solid var(--ink)}
+  .visit .kicker{color:var(--mango)}
+  .visit .kicker::before{background:var(--mango)}
+  .visit h2{color:#fff}
+  .visit-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:36px;align-items:stretch;margin-top:30px}
+  .visit-info{display:flex;flex-direction:column;gap:18px}
+  .info-row{display:flex;gap:14px;align-items:flex-start}
+  .info-row .ic{width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.14);display:grid;place-items:center;flex:none;font-size:20px}
+  .info-row h4{font-family:"Panchang";font-weight:600;font-size:1.05rem;color:#fff}
+  .info-row p,.info-row a{color:rgba(255,247,236,.86);font-weight:500;font-size:.95rem}
+  .info-row a:hover{color:#fff;text-decoration:underline}
+  .hours-list{margin-top:4px;font-size:.92rem}
+  .hours-list div{display:flex;justify-content:space-between;gap:18px;padding:2px 0;color:rgba(255,247,236,.9)}
+  .hours-note{font-size:.8rem;color:rgba(255,247,236,.7);margin-top:6px;font-style:italic}
+  .map-box{border-radius:var(--r-md);overflow:hidden;border:4px solid #fff;box-shadow:var(--shadow);min-height:340px}
+  .map-box iframe{width:100%;height:100%;min-height:340px;border:0;display:block}
+
+  /* ---------- FOOTER ---------- */
+  .foot{background:var(--ink);color:var(--cream);padding:50px 0 26px}
+  .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px;align-items:start}
+  .foot .brand-lg{font-family:"Panchang";font-weight:700;font-size:1.6rem;display:flex;align-items:center;gap:10px}
+  .foot p.blurb{color:rgba(255,247,236,.62);font-weight:500;margin-top:12px;max-width:34ch;font-size:.95rem}
+  .foot h5{font-family:"Panchang";font-weight:600;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mango);margin-bottom:13px}
+  .foot a,.foot p.li{color:rgba(255,247,236,.82);display:block;font-weight:500;font-size:.93rem;margin-bottom:8px}
+  .foot a:hover{color:#fff}
+  .foot-cta{display:inline-flex;align-items:center;gap:8px;background:var(--coral);color:#fff;font-weight:700;padding:11px 20px;border-radius:999px;margin-top:6px}
+  .foot-bar{border-top:1px solid rgba(255,247,236,.14);margin-top:34px;padding-top:18px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center;font-size:.82rem;color:rgba(255,247,236,.55)}
+  .bysemaj{display:inline-flex;align-items:center;gap:7px;font-weight:600;color:rgba(255,247,236,.66)}
+  .bysemaj a{color:var(--mango);font-weight:700}
+  .bysemaj a:hover{text-decoration:underline}
+  .bysemaj .dot{width:6px;height:6px;border-radius:50%;background:var(--coral)}
+
+  /* mobile call pill collapses to icon */
+  @media (max-width:860px){
+    .nav-links{display:none}
+    .call-cta .num{display:none}
+    .call-cta .ico{display:inline}
+    .call-cta{width:46px;height:46px;padding:0;justify-content:center;border-radius:50%}
+    .hero-grid{grid-template-columns:1fr;gap:26px}
+    .hero-art{height:clamp(330px,80vw,440px);order:-1}
+    .menu-grid{grid-template-columns:1fr 1fr;gap:14px}
+    .build-grid{grid-template-columns:1fr;gap:30px}
+    .wheel-wrap{order:-1}
+    .visit-grid{grid-template-columns:1fr}
+    .foot-top{grid-template-columns:1fr 1fr;gap:24px}
+  }
+  @media (max-width:520px){
+    .menu-grid{grid-template-columns:1fr}
+    .foot-top{grid-template-columns:1fr}
+    .hero h1{font-size:clamp(2.5rem,12vw,3.4rem)}
+    .marquee-track{font-size:.92rem}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001s !important;scroll-behavior:auto}
+    .marquee-track{animation:none}
+  }
+
+  /* EN/ES visibility */
+  [data-en]{display:none}
+  html[lang="en"] [data-es]{display:none}
+  html[lang="en"] [data-en]{display:inherit}
+</style>
+</head>
+<body>
+
+<div id="confetti-layer" aria-hidden="true"></div>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand" aria-label="Piñas Locas Quetzaly, inicio">
+      <span class="badge">🍍</span>
+      <span>Piñas Locas <span class="k">Quetzaly</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Secciones">
+      <a href="#menu" data-es>Menú</a><a href="#menu" data-en>Menu</a>
+      <a href="#armar" data-es>Arma tu vaso</a><a href="#armar" data-en>Build a cup</a>
+      <a href="#galeria" data-es>Galería</a><a href="#galeria" data-en>Gallery</a>
+      <a href="#visita" data-es>Visítanos</a><a href="#visita" data-en>Visit</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-toggle" role="group" aria-label="Idioma / Language">
+        <button id="es-btn" class="active" aria-pressed="true">ES</button>
+        <button id="en-btn" aria-pressed="false">EN</button>
+      </div>
+      <a href="tel:+18625202314" class="call-cta" aria-label="Llamar al (862) 520-2314">
+        <span class="ico" aria-hidden="true">📞</span>
+        <span class="num">(862) 520-2314</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="status-pill" id="status-pill">
+          <span class="status-dot" id="status-dot"></span>
+          <span id="status-text">Cargando horario</span>
+        </div>
+        <h1>
+          <span data-es>La fruta más <em>loca</em><br>de <span class="tilt">Orange</span>.</span>
+          <span data-en>The wildest fruit<br>cup on <span class="tilt">Main St</span>.</span>
+        </h1>
+        <p class="sub">
+          <span data-es>Mangonadas, aguas frescas, paletas y vasos locos hechos al momento. Fresco, dulce y bien picosito, justo como en casa.</span>
+          <span data-en>Mangonadas, aguas frescas, paletas and loaded fruit cups made to order. Fresh, sweet and just spicy enough, the way home tastes.</span>
+        </p>
+        <div class="hero-cta-row">
+          <a href="#armar" class="btn-primary">
+            <span data-es>Arma tu vaso</span><span data-en>Build your cup</span> <span aria-hidden="true">→</span>
+          </a>
+          <a href="#menu" class="btn-ghost">
+            <span data-es>Ver el menú</span><span data-en>See the menu</span>
+          </a>
+        </div>
+        <div class="hero-tags">
+          <span class="tag">🥭 Mangonada</span>
+          <span class="tag">🍓 Fresas con crema</span>
+          <span class="tag">🌶️ Chamoyada</span>
+          <span class="tag">🥤 Aguas frescas</span>
+          <span class="tag">🍦 Paletas</span>
+        </div>
+      </div>
+
+      <div class="hero-art" aria-hidden="false">
+        <figure class="ha ha1">
+          <img src="https://images.unsplash.com/photo-1560008581-09826d1de69e?w=900&q=72&auto=format&fit=crop" alt="Nieve cremosa con granas de colores servida en un vasito orillado de chochitos" loading="eager" />
+        </figure>
+        <figure class="ha ha2">
+          <img src="https://images.unsplash.com/photo-1546173159-315724a31696?w=700&q=72&auto=format&fit=crop" alt="Vaso alto de agua fresca de mango con hielo, lima y mango fresco al lado" loading="eager" />
+        </figure>
+        <figure class="ha ha3">
+          <img src="https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=700&q=72&auto=format&fit=crop" alt="Licuado cremoso de mango con popote, mango maduro a un lado" loading="lazy" />
+        </figure>
+        <div class="sticker">Recién<br>llegamos a<br>Orange</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MARQUEE ===================== -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>MANGONADA</span><span>AGUA FRESCA</span><span>CHAMOYADA</span><span>PALETAS</span><span>MALTEADAS</span><span>VASO LOCO</span><span>FRESAS CON CREMA</span><span>RASPADO</span>
+    <span>MANGONADA</span><span>AGUA FRESCA</span><span>CHAMOYADA</span><span>PALETAS</span><span>MALTEADAS</span><span>VASO LOCO</span><span>FRESAS CON CREMA</span><span>RASPADO</span>
+  </div>
+</div>
+
+<!-- ===================== MENU ===================== -->
+<section class="sec" id="menu">
+  <div class="wrap">
+    <span class="kicker"><span data-es>El menú</span><span data-en>The menu</span></span>
+    <h2><span data-es>Antojitos hechos al momento</span><span data-en>Made fresh when you order</span></h2>
+    <p class="lede">
+      <span data-es>Cada vaso se prepara enfrente de ti con fruta de verdad, chamoy, chile y mucho cariño. Estos son los favoritos del barrio.</span>
+      <span data-en>Every cup is built in front of you with real fruit, chamoy, chili and a lot of love. These are the neighborhood favorites.</span>
+    </p>
+
+    <div class="menu-grid">
+      <article class="mcard">
+        <div class="pic">
+          <span class="chip">⭐ <span data-es>El más pedido</span><span data-en>Most ordered</span></span>
+          <img src="https://images.unsplash.com/photo-1525385133512-2f3bdd039054?w=600&q=70&auto=format&fit=crop" alt="Mangoneada espesa de mango con popote y trozos de fruta en brocheta" loading="lazy" />
+        </div>
+        <div class="body">
+          <h3>Mangoneada</h3>
+          <p><span data-es>Mango espeso con chamoy, limón, chile Tajín y un tamarindo. El clásico que nos hizo famosos.</span><span data-en>Thick mango blended with chamoy, lime, Tajín chili and a tamarind straw. The classic that put us on the map.</span></p>
+          <span class="price">$10</span>
+        </div>
+      </article>
+
+      <article class="mcard">
+        <div class="pic">
+          <span class="chip">🥤 <span data-es>Refrescante</span><span data-en>Refreshing</span></span>
+          <img src="https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=600&q=70&auto=format&fit=crop" alt="Fila de aguas frescas de colores en frascos: horchata, jamaica, tamarindo y verde" loading="lazy" />
+        </div>
+        <div class="body">
+          <h3><span data-es>Aguas frescas</span><span data-en>Aguas frescas</span></h3>
+          <p><span data-es>Hechas en casa cada mañana. Horchata, jamaica, tamarindo, mango y la fruta del día.</span><span data-en>Made in house every morning. Horchata, jamaica, tamarindo, mango and the fruit of the day.</span></p>
+          <span class="price">$6</span>
+        </div>
+      </article>
+
+      <article class="mcard">
+        <div class="pic">
+          <span class="chip">🍓 <span data-es>Cremosita</span><span data-en>Creamy</span></span>
+          <img src="https://images.unsplash.com/photo-1502741224143-90386d7f8c82?w=600&q=70&auto=format&fit=crop" alt="Fresas frescas con crema en un vaso, vistas desde arriba con menta" loading="lazy" />
+        </div>
+        <div class="body">
+          <h3>Fresas con crema</h3>
+          <p><span data-es>Fresas frescas bañadas en crema dulce. Pídela con chocolate o con galleta encima.</span><span data-en>Fresh strawberries folded into sweet cream. Add chocolate or crushed cookie on top.</span></p>
+          <span class="price">$14.99</span>
+        </div>
+      </article>
+
+      <article class="mcard">
+        <div class="pic">
+          <span class="chip">🍫 <span data-es>Para compartir</span><span data-en>To share</span></span>
+          <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=600&q=70&auto=format&fit=crop" alt="Malteada de chocolate coronada con crema batida y una galleta Oreo" loading="lazy" />
+        </div>
+        <div class="body">
+          <h3>Malteadas</h3>
+          <p><span data-es>Malteada de Ferrero, Gansito o Oreo, coronada con crema y todo el topping.</span><span data-en>Ferrero, Gansito or Oreo milkshake, crowned with whipped cream and every topping.</span></p>
+          <span class="price">$12</span>
+        </div>
+      </article>
+
+      <article class="mcard">
+        <div class="pic">
+          <span class="chip">🍦 <span data-es>De la nevería</span><span data-en>From the freezer</span></span>
+          <img src="https://images.unsplash.com/photo-1488900128323-21503983a07e?w=600&q=70&auto=format&fit=crop" alt="Paletas artesanales de frutos rojos apiladas sobre papel" loading="lazy" />
+        </div>
+        <div class="body">
+          <h3>Paletas</h3>
+          <p><span data-es>Paletas de leche y de agua hechas con fruta de verdad. Coco, fresa, mango con chile y más.</span><span data-en>Milk and water popsicles made with real fruit. Coconut, strawberry, mango con chile and more.</span></p>
+          <span class="price"><span data-es>desde</span><span data-en>from</span> $3.25</span>
+        </div>
+      </article>
+
+      <article class="mcard">
+        <div class="pic">
+          <span class="chip">🌶️ <span data-es>Bien loco</span><span data-en>Loaded</span></span>
+          <img src="https://images.unsplash.com/photo-1564093497595-593b96d80180?w=600&q=70&auto=format&fit=crop" alt="Tabla de fruta fresca con mango, fresa, plátano y arándanos" loading="lazy" />
+        </div>
+        <div class="body">
+          <h3><span data-es>Vasos &amp; tablas locas</span><span data-en>Loaded cups &amp; trays</span></h3>
+          <p><span data-es>Charly vaso, takis locos, chicharrón preparado y tablas de fruta para toda la banda.</span><span data-en>Charly vaso, takis locos, chicharrón preparado and big fruit trays for the whole crew.</span></p>
+          <span class="price">$10 – $25</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BUILD YOUR CUP (signature) ===================== -->
+<section class="builder" id="armar">
+  <div class="wrap">
+    <span class="kicker"><span data-es>Tu antojo, a tu manera</span><span data-en>Your cup, your way</span></span>
+    <h2><span data-es>Arma tu vaso loco</span><span data-en>Build your loco cup</span></h2>
+    <p class="lede">
+      <span data-es>Escoge tu base, tu fruta y qué tan picosito lo quieres. Mira cómo se llena tu vaso. Toca cada opción.</span>
+      <span data-en>Pick your base, your fruit and how spicy you want it. Watch your cup fill up. Tap any option.</span>
+    </p>
+
+    <div class="build-grid">
+      <div class="picker">
+        <div class="picker-block">
+          <h4><span class="n">1</span> <span data-es>La base</span><span data-en>The base</span></h4>
+          <div class="opts" data-group="base" role="group" aria-label="Base">
+            <button class="opt" data-val="Mango" data-emoji="🥭" data-color="#FFB12B" aria-pressed="true"><span class="em">🥭</span>Mango</button>
+            <button class="opt" data-val="Fresa" data-emoji="🍓" data-color="#FF4D6D"><span class="em">🍓</span><span data-es>Fresa</span><span data-en>Strawberry</span></button>
+            <button class="opt" data-val="Sandía" data-emoji="🍉" data-color="#FF5A5F"><span class="em">🍉</span><span data-es>Sandía</span><span data-en>Watermelon</span></button>
+            <button class="opt" data-val="Piña" data-emoji="🍍" data-color="#F2C53D"><span class="em">🍍</span><span data-es>Piña</span><span data-en>Pineapple</span></button>
+            <button class="opt" data-val="Coco" data-emoji="🥥" data-color="#EFE7D6"><span class="em">🥥</span>Coco</button>
+          </div>
+        </div>
+
+        <div class="picker-block">
+          <h4><span class="n">2</span> <span data-es>El topping</span><span data-en>The topping</span></h4>
+          <div class="opts" data-group="top" role="group" aria-label="Topping">
+            <button class="opt" data-val="chamoy" data-emoji="🫙" aria-pressed="true"><span class="em">🫙</span>Chamoy</button>
+            <button class="opt" data-val="gomitas" data-emoji="🍬"><span class="em">🍬</span>Gomitas</button>
+            <button class="opt" data-val="crema" data-emoji="🍶"><span class="em">🍶</span>Crema</button>
+            <button class="opt" data-val="tamarindo" data-emoji="🟤"><span class="em">🟤</span>Tamarindo</button>
+            <button class="opt" data-val="lima" data-emoji="🍈"><span class="em">🍈</span><span data-es>Lima</span><span data-en>Lime</span></button>
+          </div>
+        </div>
+
+        <div class="picker-block">
+          <h4><span class="n">3</span> <span data-es>El picante</span><span data-en>The heat</span></h4>
+          <div class="opts" data-group="heat" role="group" aria-label="Picante">
+            <button class="opt" data-val="suave" aria-pressed="true"><span data-es>Suave</span><span data-en>Mild</span></button>
+            <button class="opt" data-val="con chile">Tajín 🌶️</button>
+            <button class="opt" data-val="bien picosito"><span data-es>Bien picosito</span><span data-en>Extra spicy</span> 🔥</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="wheel-wrap">
+        <div class="cup-stage">
+          <svg class="cup-svg" viewBox="0 0 200 260" role="img" aria-labelledby="cuptitle">
+            <title id="cuptitle">Vista previa de tu vaso</title>
+            <defs>
+              <clipPath id="cupclip">
+                <path d="M40 70 L160 70 L146 232 Q144 248 128 248 L72 248 Q56 248 54 232 Z"/>
+              </clipPath>
+            </defs>
+            <!-- fill -->
+            <g clip-path="url(#cupclip)">
+              <rect x="30" y="70" width="140" height="190" fill="#FFB12B" id="cup-fill" style="transition:fill .45s ease"/>
+              <rect x="30" y="120" width="140" height="140" fill="rgba(0,0,0,.06)"/>
+              <!-- chamoy drips -->
+              <path id="cup-drip" d="M40 70 q14 26 0 52 q16 22 2 50 M120 70 q-12 30 4 58 q-14 24 2 48 M82 70 q10 22 -2 46"
+                    stroke="#E63E48" stroke-width="9" fill="none" stroke-linecap="round" opacity=".82" style="transition:stroke .4s"/>
+            </g>
+            <!-- cup outline -->
+            <path d="M40 70 L160 70 L146 232 Q144 248 128 248 L72 248 Q56 248 54 232 Z" fill="none" stroke="#231a16" stroke-width="5"/>
+            <!-- rim -->
+            <ellipse cx="100" cy="70" rx="60" ry="11" fill="#fff" stroke="#231a16" stroke-width="5"/>
+            <ellipse cx="100" cy="70" rx="49" ry="7" fill="#FFE2C4"/>
+            <!-- straw -->
+            <rect x="122" y="14" width="11" height="74" rx="5" transform="rotate(12 127 50)" fill="#FF5A5F" stroke="#231a16" stroke-width="3"/>
+            <!-- garnish emoji -->
+            <text id="cup-emoji" x="76" y="58" font-size="30">🥭</text>
+          </svg>
+        </div>
+        <div class="cup-readout" aria-live="polite">
+          <div class="nm" id="cup-name">Mango con chamoy</div>
+          <div class="ing" id="cup-ing"><span data-es>base de mango · chamoy · suave</span></div>
+          <a href="tel:+18625202314" class="ord">
+            <span data-es>Pídelo así</span><span data-en>Order it like this</span> <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GALLERY / PANORAMA ===================== -->
+<section class="pano sec" id="galeria" style="padding-bottom:30px">
+  <div class="wrap">
+    <span class="kicker"><span data-es>Desde el mostrador</span><span data-en>From the counter</span></span>
+    <h2><span data-es>Puro color, pura fruta</span><span data-en>All color, all fruit</span></h2>
+  </div>
+  <div class="pano-row">
+    <figure class="pano-card">
+      <img src="https://images.unsplash.com/photo-1589984662646-e7b2e4962f18?w=700&q=70&auto=format&fit=crop" alt="Rebanadas de sandía fresca sobre fondo verde menta" loading="lazy" />
+      <figcaption class="cap"><span data-es>Sandía irresistible</span><span data-en>Sandía irresistible</span></figcaption>
+    </figure>
+    <figure class="pano-card">
+      <img src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=700&q=70&auto=format&fit=crop" alt="Cono de nieve de fresa y vainilla sostenido frente a una pared amarilla" loading="lazy" />
+      <figcaption class="cap"><span data-es>Nieves y conos</span><span data-en>Ice cream cones</span></figcaption>
+    </figure>
+    <figure class="pano-card">
+      <img src="https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=700&q=70&auto=format&fit=crop" alt="Jugo de naranja recién exprimido en vaso alto con una rueda de naranja" loading="lazy" />
+      <figcaption class="cap"><span data-es>Jugos recién hechos</span><span data-en>Fresh-squeezed juices</span></figcaption>
+    </figure>
+    <figure class="pano-card">
+      <img src="https://images.unsplash.com/photo-1610970881699-44a5587cabec?w=700&q=70&auto=format&fit=crop" alt="Jugo verde con manzana, kiwi, pepino y menta fresca" loading="lazy" />
+      <figcaption class="cap"><span data-es>Jugos verdes</span><span data-en>Green juices</span></figcaption>
+    </figure>
+    <figure class="pano-card">
+      <img src="https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?w=700&q=70&auto=format&fit=crop" alt="Montón de mangos maduros, rojos, amarillos y verdes" loading="lazy" />
+      <figcaption class="cap"><span data-es>Fruta de temporada</span><span data-en>Seasonal fruit</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===================== VISIT / MAP ===================== -->
+<section class="visit" id="visita">
+  <div class="wrap">
+    <span class="kicker"><span data-es>Pásate</span><span data-en>Come by</span></span>
+    <h2><span data-es>En el corazón de Main Street</span><span data-en>Right on Main Street</span></h2>
+    <div class="visit-grid">
+      <div class="visit-info">
+        <div class="info-row">
+          <div class="ic" aria-hidden="true">📍</div>
+          <div>
+            <h4><span data-es>Dónde estamos</span><span data-en>Where we are</span></h4>
+            <p><a href="https://www.google.com/maps?q=203+Main+St,+Orange,+NJ+07050" target="_blank" rel="noopener">203 Main St, City of Orange, NJ 07050</a></p>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="ic" aria-hidden="true">📞</div>
+          <div>
+            <h4><span data-es>Llámanos</span><span data-en>Call us</span></h4>
+            <p><a href="tel:+18625202314">(862) 520-2314</a></p>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="ic" aria-hidden="true">🕒</div>
+          <div>
+            <h4><span data-es>Horario</span><span data-en>Hours</span></h4>
+            <div class="hours-list" id="hours-list"></div>
+            <p class="hours-note">
+              <span data-es>El horario puede variar. Mejor llámanos para confirmar.</span>
+              <span data-en>Hours can vary. Best to call to confirm.</span>
+            </p>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="ic" aria-hidden="true">📸</div>
+          <div>
+            <h4>Instagram</h4>
+            <p><a href="https://www.instagram.com/pinaslocasquetzaly/" target="_blank" rel="noopener">@pinaslocasquetzaly</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="map-box">
+        <iframe
+          src="https://www.google.com/maps?q=203%20Main%20St%2C%20Orange%2C%20NJ%2007050&z=16&output=embed"
+          title="Mapa de Piñas Locas Quetzaly en 203 Main St, City of Orange, NJ"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <div class="brand-lg"><span class="badge" style="width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFD96A,var(--mango-deep));display:grid;place-items:center;font-size:18px">🍍</span> Piñas Locas Quetzaly</div>
+        <p class="blurb"><span data-es>La fruta más loca de Orange, hecha al momento con chamoy, chile y mucho cariño.</span><span data-en>The wildest fruit on Main Street, made to order with chamoy, chili and a lot of love.</span></p>
+        <a href="tel:+18625202314" class="foot-cta"><span aria-hidden="true">📞</span> <span data-es>Hacer un pedido</span><span data-en>Place an order</span></a>
+      </div>
+      <div>
+        <h5><span data-es>Menú</span><span data-en>Menu</span></h5>
+        <a href="#menu">Mangoneada</a>
+        <a href="#menu"><span data-es>Aguas frescas</span><span data-en>Aguas frescas</span></a>
+        <a href="#menu">Fresas con crema</a>
+        <a href="#menu"><span data-es>Paletas &amp; malteadas</span><span data-en>Paletas &amp; shakes</span></a>
+        <a href="#armar"><span data-es>Arma tu vaso</span><span data-en>Build your cup</span></a>
+      </div>
+      <div>
+        <h5><span data-es>Visítanos</span><span data-en>Visit</span></h5>
+        <p class="li">203 Main St</p>
+        <p class="li">City of Orange, NJ 07050</p>
+        <p class="li" id="foot-hours">12 PM &ndash; 10 PM</p>
+        <a href="https://www.instagram.com/pinaslocasquetzaly/" target="_blank" rel="noopener">@pinaslocasquetzaly</a>
+      </div>
+    </div>
+    <div class="foot-bar">
+      <span>© <span id="yr"></span> Piñas Locas Quetzaly · City of Orange, NJ</span>
+      <span class="bysemaj"><span class="dot" aria-hidden="true"></span> built by <a href="https://bysemaj.com" target="_blank" rel="noopener">bysemaj.com</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- year ---------- */
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* ---------- nav scroll shadow ---------- */
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function(){
+    nav.classList.toggle('scrolled', window.scrollY > 12);
+  }, {passive:true});
+
+  /* ---------- language toggle ---------- */
+  var esBtn = document.getElementById('es-btn'), enBtn = document.getElementById('en-btn');
+  function setLang(lang){
+    document.documentElement.lang = lang;
+    var es = lang === 'es';
+    esBtn.classList.toggle('active', es); enBtn.classList.toggle('active', !es);
+    esBtn.setAttribute('aria-pressed', es); enBtn.setAttribute('aria-pressed', !es);
+    renderHours(); renderReadout();
+  }
+  esBtn.addEventListener('click', function(){ setLang('es'); });
+  enBtn.addEventListener('click', function(){ setLang('en'); });
+
+  /* ---------- HOURS + live status pill ----------
+     Chain-verified common schedule (Passaic/Paterson run 12 PM–10 PM daily).
+     Orange-specific hours are not officially published, so this is the typical
+     schedule and the copy tells visitors to call to confirm. */
+  var HOURS = [ // 0=Sun ... 6=Sat ; open/close in minutes from midnight
+    {d:0, o:720, c:1320}, // Sun 12 PM - 10 PM
+    {d:1, o:720, c:1320}, // Mon
+    {d:2, o:720, c:1320}, // Tue
+    {d:3, o:720, c:1320}, // Wed
+    {d:4, o:720, c:1320}, // Thu
+    {d:5, o:720, c:1380}, // Fri 12 PM - 11 PM
+    {d:6, o:720, c:1380}  // Sat 12 PM - 11 PM
+  ];
+  var DAY_ES = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+  var DAY_EN = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+  function fmt12(mins){
+    var h = Math.floor(mins/60), m = mins%60;
+    var ap = h >= 12 ? 'PM' : 'AM';
+    var h12 = h % 12; if(h12===0) h12 = 12;
+    return h12 + (m? ':'+(m<10?'0':'')+m : '') + ' ' + ap;
+  }
+
+  // Current time in America/New_York
+  function nyNow(){
+    var s = new Date().toLocaleString('en-US', {timeZone:'America/New_York'});
+    return new Date(s);
+  }
+
+  function computeStatus(){
+    var now = nyNow();
+    var day = now.getDay();
+    var mins = now.getHours()*60 + now.getMinutes();
+    var today = HOURS[day];
+    var open = mins >= today.o && mins < today.c;
+    return {open:open, today:today, mins:mins, day:day};
+  }
+
+  function renderStatus(){
+    var st = computeStatus();
+    var es = document.documentElement.lang !== 'en';
+    var dot = document.getElementById('status-dot');
+    var txt = document.getElementById('status-text');
+    if(st.open){
+      dot.classList.remove('closed');
+      txt.textContent = (es?'Abierto ahora · cierra ':'Open now · closes ') + fmt12(st.today.c);
+    } else {
+      dot.classList.add('closed');
+      // find next opening
+      var label;
+      if(st.mins < st.today.o){
+        label = (es?'Cerrado · abre hoy ':'Closed · opens today ') + fmt12(st.today.o);
+      } else {
+        var nd = (st.day+1)%7;
+        label = (es?'Cerrado · abre ':'Closed · opens ') + (es?DAY_ES[nd]:DAY_EN[nd]) + ' ' + fmt12(HOURS[nd].o);
+      }
+      txt.textContent = label;
+    }
+  }
+
+  function renderHours(){
+    var es = document.documentElement.lang !== 'en';
+    var names = es ? DAY_ES : DAY_EN;
+    var st = computeStatus();
+    var box = document.getElementById('hours-list');
+    var rows = '';
+    // order Mon..Sun for readability
+    var order = [1,2,3,4,5,6,0];
+    order.forEach(function(d){
+      var h = HOURS[d];
+      var strong = d === st.day ? 'style="font-weight:800;color:#fff"' : '';
+      rows += '<div '+strong+'><span>'+names[d]+'</span><span>'+fmt12(h.o)+' – '+fmt12(h.c)+'</span></div>';
+    });
+    box.innerHTML = rows;
+  }
+
+  renderStatus(); renderHours();
+  setInterval(renderStatus, 60000);
+
+  /* ===================================================================
+     SIGNATURE: build-your-cup flavor picker + fruit confetti
+     =================================================================== */
+  var state = {
+    base:{val:'Mango', emoji:'🥭', color:'#FFB12B'},
+    top:{val:'chamoy'},
+    heat:{val:'suave'}
+  };
+
+  var TOP_ES = {chamoy:'chamoy', gomitas:'gomitas', crema:'crema', tamarindo:'tamarindo', lima:'lima'};
+  var TOP_EN = {chamoy:'chamoy', gomitas:'gummies', crema:'cream', tamarindo:'tamarind', lima:'lime'};
+  var HEAT_ES = {'suave':'suave','con chile':'con chile Tajín','bien picosito':'bien picosito'};
+  var HEAT_EN = {'suave':'mild','con chile':'with Tajín','bien picosito':'extra spicy'};
+  var BASE_EN = {'Mango':'Mango','Fresa':'Strawberry','Sandía':'Watermelon','Piña':'Pineapple','Coco':'Coconut'};
+  var TOP_EMOJI = {chamoy:'🫙', gomitas:'🍬', crema:'🍶', tamarindo:'🟤', lima:'🍈'};
+  var DRIP_COLOR = {chamoy:'#E63E48', gomitas:'#FF8FB1', crema:'#FFF0D4', tamarindo:'#9c5a2b', lima:'#7FBF3F'};
+
+  var cupFill = document.getElementById('cup-fill');
+  var cupEmoji = document.getElementById('cup-emoji');
+  var cupDrip = document.getElementById('cup-drip');
+
+  function renderReadout(){
+    var es = document.documentElement.lang !== 'en';
+    var baseName = es ? state.base.val : (BASE_EN[state.base.val] || state.base.val);
+    var topName = es ? TOP_ES[state.top.val] : TOP_EN[state.top.val];
+    var heatName = es ? HEAT_ES[state.heat.val] : HEAT_EN[state.heat.val];
+    document.getElementById('cup-name').textContent = baseName + ' con ' + topName;
+    var ing = es
+      ? ('base de '+state.base.val.toLowerCase()+' · '+topName+' · '+heatName)
+      : (baseName.toLowerCase()+' base · '+topName+' · '+heatName);
+    document.getElementById('cup-ing').textContent = ing;
+  }
+
+  function renderCup(){
+    cupFill.setAttribute('fill', state.base.color);
+    cupEmoji.textContent = state.base.emoji;
+    cupDrip.setAttribute('stroke', DRIP_COLOR[state.top.val] || '#E63E48');
+    renderReadout();
+  }
+
+  /* fruit confetti */
+  var EMOJIS = ['🥭','🍓','🍉','🍍','🥥','🍬','🌶️','🍈','💛','🧡'];
+  var layer = document.getElementById('confetti-layer');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function burst(x, y, emoji){
+    if(reduce) return;
+    var n = 14;
+    for(var i=0;i<n;i++){
+      (function(){
+        var el = document.createElement('span');
+        el.textContent = Math.random() < .55 && emoji ? emoji : EMOJIS[(Math.random()*EMOJIS.length)|0];
+        el.style.cssText = 'position:absolute;left:'+x+'px;top:'+y+'px;font-size:'+(13+Math.random()*15)+'px;will-change:transform,opacity;pointer-events:none';
+        layer.appendChild(el);
+        var ang = Math.random()*Math.PI*2;
+        var dist = 50 + Math.random()*120;
+        var dx = Math.cos(ang)*dist;
+        var dy = Math.sin(ang)*dist - (60+Math.random()*60); // bias upward
+        var rot = (Math.random()*720-360);
+        var dur = 750 + Math.random()*650;
+        el.animate([
+          {transform:'translate(0,0) rotate(0deg)', opacity:1},
+          {transform:'translate('+dx+'px,'+(dy*0.4)+'px) rotate('+(rot*0.5)+'deg)', opacity:1, offset:.45},
+          {transform:'translate('+(dx*1.3)+'px,'+(dy*0.2 + 160)+'px) rotate('+rot+'deg)', opacity:0}
+        ], {duration:dur, easing:'cubic-bezier(.2,.7,.3,1)'});
+        setTimeout(function(){ el.remove(); }, dur+40);
+      })();
+    }
+  }
+
+  function bindGroup(group){
+    var container = document.querySelector('.opts[data-group="'+group+'"]');
+    container.addEventListener('click', function(e){
+      var btn = e.target.closest('.opt');
+      if(!btn) return;
+      // toggle pressed within group
+      container.querySelectorAll('.opt').forEach(function(b){ b.setAttribute('aria-pressed','false'); });
+      btn.setAttribute('aria-pressed','true');
+
+      var emoji = btn.getAttribute('data-emoji') || '';
+      if(group === 'base'){
+        state.base = {val:btn.getAttribute('data-val'), emoji:emoji, color:btn.getAttribute('data-color')};
+      } else if(group === 'top'){
+        state.top = {val:btn.getAttribute('data-val')};
+        emoji = TOP_EMOJI[state.top.val];
+      } else {
+        state.heat = {val:btn.getAttribute('data-val')};
+      }
+      renderCup();
+
+      // confetti at the button position
+      var r = btn.getBoundingClientRect();
+      burst(r.left + r.width/2, r.top + r.height/2, emoji);
+    });
+  }
+  ['base','top','heat'].forEach(bindGroup);
+
+  renderCup();
+
+  /* gentle reveal on scroll for cards. Visibility is NEVER gated on the
+     observer firing: a safety net reveals everything after 2.5s and on tab
+     focus, so a backgrounded preview tab or stalled IO never shows blanks. */
+  var revealEls = [].slice.call(document.querySelectorAll('.mcard, .pano-card'));
+  function revealAll(){
+    revealEls.forEach(function(el){
+      el.style.transition = 'opacity .6s ease, transform .6s ease';
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+  }
+  if('IntersectionObserver' in window && !reduce){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          en.target.style.transition = 'opacity .6s ease, transform .6s ease';
+          en.target.style.opacity = '1';
+          en.target.style.transform = 'none';
+          io.unobserve(en.target);
+        }
+      });
+    }, {threshold:.1, rootMargin:'0px 0px -8% 0px'});
+    revealEls.forEach(function(el){
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(22px)';
+      io.observe(el);
+    });
+    setTimeout(revealAll, 2500);
+    document.addEventListener('visibilitychange', function(){
+      if(document.visibilityState === 'visible') revealAll();
+    });
+  } else {
+    revealAll();
+  }
+})();
+</script>
+</body>
+</html>
